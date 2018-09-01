@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sango.microservice.microservice.dao.IUserDaoService;
-import com.sango.microservice.microservice.domain.Users;
+import com.sango.microservice.microservice.domain.User;
 
 @RestController
 public class UserResource {
@@ -17,7 +17,7 @@ public class UserResource {
 	private IUserDaoService userDaoService;
 
 	@GetMapping(path="/users",produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Users> getUsers(){
+	public List<User> getUsers(){
 		return userDaoService.getUsers();
 	}
 }

@@ -9,5 +9,6 @@ public interface IUserDaoService {
 	public List<User> getUsers();
 	public User getUserById(int id);
 	public User addUser(User user);
+	public List<User> deleteUserById(int id);
 
 }

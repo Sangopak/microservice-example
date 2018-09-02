@@ -13,13 +13,13 @@ public class UserDaoServiceImpl implements IUserDaoService {
 
 	private static List<User> userList = new ArrayList<User>();
 	
-	private static int userId = 2;
+	private static int userId = 1;
 	
 	//adding static block to mock DB layer
-	static {
+	/*static {
 		userList.add(new User(1,"Subho", new Date()));
 		userList.add(new User(2,"Pupu", new Date()));
-	}
+	}*/
 	
 	@Override
 	public List<User> getUsers() {
@@ -46,6 +46,16 @@ public class UserDaoServiceImpl implements IUserDaoService {
 		}
 		userList.add(user);		
 		return user;
+	}
+
+	@Override
+	public List<User> deleteUserById(int id) {
+		for(User user: userList) {
+			if(user.getId() == id) {
+				userList.remove(user);
+			}
+		}
+		return userList;
 	}
 	
 	

@@ -6,4 +6,11 @@ spring:
   jackson:
     serialization:
       write-dates-as-timestamps: false
+  # Needed to use ReloadableResourceBundleMessageSource as ResourceBundleMessageSource
+  # does not support UTF-8    
+  #messages:
+  #  basename: messages
+  #  encoding: UTF-8
+  #  cache-duration: 30
+    
       

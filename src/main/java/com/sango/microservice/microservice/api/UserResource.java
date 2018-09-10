@@ -5,6 +5,8 @@ import java.net.URI;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -57,7 +59,7 @@ public class UserResource {
 	}
 	
 	@PostMapping(path="/users")
-	public ResponseEntity<User> addUser (@RequestBody User user) {
+	public ResponseEntity<User> addUser (@RequestBody @Valid User user) {
 		User newUser = userDaoService.addUser(user);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newUser.getId()).toUri();
 		return ResponseEntity.created(location).build();		

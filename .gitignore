@@ -23,3 +23,6 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+/mvnw
+/.gitignore.swp
+/mvnw.cmd

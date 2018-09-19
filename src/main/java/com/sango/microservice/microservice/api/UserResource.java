@@ -1,8 +1,9 @@
 package com.sango.microservice.microservice.api;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.net.URI;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,7 +14,6 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,11 +38,19 @@ public class UserResource {
 	private IUserDaoService userDaoService;
 
 	@GetMapping(path="/users")
+	//Dynamic Filtering using MappingJacksonValue
 	public List<User> getUsers(){
-		List<User> users = userDaoService.getUsers();
+		List<User> users = userDaoService.getUsers();		
 		if (users == null || users.size() == 0) {
 			throw new NoUsersFoundException(messageSource.getMessage("error.no.user.found",null,LocaleContextHolder.getLocale()));
 		}
+		
+		// enable below sections with mappingJacksonValue to activate dynamic filter
+		/*MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(users); 
+		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id","name");
+		FilterProvider filters = new SimpleFilterProvider().addFilter("dynamic-dob-filter", filter );
+		mappingJacksonValue.setFilters(filters); */
+		
 		return users;
 	}
 	

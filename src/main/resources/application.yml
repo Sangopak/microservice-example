@@ -12,5 +12,10 @@ spring:
   #  basename: messages
   #  encoding: UTF-8
   #  cache-duration: 30
-    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    # more metrics means more performance issue so go easy on this
       

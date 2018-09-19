@@ -5,10 +5,13 @@ import java.util.Date;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(description="Stupid details!!")
+@ApiModel(description="Stupid details of Users!!")
+//@JsonFilter(value="dynamic-dob-filter")  //Enable for dynamic Filters
 public class User {
 	
 	@ApiModelProperty(notes="System generated number")
@@ -22,15 +25,19 @@ public class User {
 	@ApiModelProperty(notes="DOB should be in past")
 	private Date dob;
 	
+	@JsonIgnore 										//Static Filtering
+	private Long ssn;
+	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(Integer id, String name, Date dob) {
+	public User(Integer id, String name, Date dob, Long ssn) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.dob = dob;
+		this.ssn = ssn;
 	}
 
 	public Integer getId() {
@@ -55,6 +62,14 @@ public class User {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	public Long getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(Long ssn) {
+		this.ssn = ssn;
 	}
 	
 	

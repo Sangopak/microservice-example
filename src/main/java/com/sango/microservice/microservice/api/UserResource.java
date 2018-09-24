@@ -77,7 +77,8 @@ public class UserResource {
 	
 	@PostMapping(path="/users")
 	public ResponseEntity<User> addUser (@RequestBody @Valid User user) {
-		User newUser = userDaoService.addUser(user);
+		//User newUser = userDaoService.addUser(user);
+		User newUser = userRepository.save(user);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newUser.getId()).toUri();
 		return ResponseEntity.created(location).build();		
 	}

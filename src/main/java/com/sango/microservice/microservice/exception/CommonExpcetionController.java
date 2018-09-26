@@ -31,11 +31,18 @@ public class CommonExpcetionController extends ResponseEntityExceptionHandler{
 	}
 	
 	@ExceptionHandler(value = UserNotFoundException.class )
-	protected ResponseEntity<Object> UserNotFoundExceptionException(UserNotFoundException ex, WebRequest request) {
+	protected ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
 		        CommonExceptionResponse commonExceptionRespose = 
 		        		new CommonExceptionResponse(new Date(),ex.getMessage(),request.getDescription(false));
 		        return new ResponseEntity<Object>(commonExceptionRespose,HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(value =  UserPostNotFoundException.class)
+	protected ResponseEntity<Object> handleUserPostNotFoundException(UserPostNotFoundException ex, WebRequest request) {
+        CommonExceptionResponse commonExceptionRespose = 
+        		new CommonExceptionResponse(new Date(),ex.getMessage(),request.getDescription(false));
+        return new ResponseEntity<Object>(commonExceptionRespose,HttpStatus.NOT_FOUND);
+}
 	
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(

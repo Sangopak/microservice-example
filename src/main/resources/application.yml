@@ -12,14 +12,14 @@ spring:
       path: /h2
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     show-sql: true  
   datasource:
     url: jdbc:h2:mem:test
     username: sa
     password: 
     driver-class-name: org.h2.Driver
-  # scheme.sql and data.sql are loaded by springboot by default
+  # scheme.sql and import.sql are loaded by springboot by default
   
   # Needed to use ReloadableResourceBundleMessageSource as ResourceBundleMessageSource
   # does not support UTF-8    

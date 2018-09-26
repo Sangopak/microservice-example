@@ -1,12 +1,15 @@
 package com.sango.microservice.microservice.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -20,8 +23,13 @@ import io.swagger.annotations.ApiModelProperty;
 @Table(name="t_user")
 @ApiModel(description="Stupid details of Users!!")
 //@JsonFilter(value="dynamic-dob-filter")  //Enable for dynamic Filters
-public class User {
+public class User implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@ApiModelProperty(notes="System generated number")
 	@Id
 	@Column(name="id")
@@ -41,6 +49,9 @@ public class User {
 	@JsonIgnore 										//Static Filtering
 	@Column(name="ssn")
 	private Long ssn;
+	
+	@OneToMany(mappedBy="user")
+	private List<Post> posts;
 	
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -84,6 +95,14 @@ public class User {
 
 	public void setSsn(Long ssn) {
 		this.ssn = ssn;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 	
 	

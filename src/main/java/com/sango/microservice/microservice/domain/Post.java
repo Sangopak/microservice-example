@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModel;
 
 @Entity
@@ -32,6 +34,7 @@ public class Post implements Serializable{
 	private String description;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
+	@JsonIgnore
 	private User user;
 	
 	public Post() {
@@ -60,6 +63,14 @@ public class Post implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

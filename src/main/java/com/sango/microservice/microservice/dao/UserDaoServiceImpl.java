@@ -1,7 +1,7 @@
 package com.sango.microservice.microservice.dao;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -14,12 +14,6 @@ public class UserDaoServiceImpl implements IUserDaoService {
 	private static List<User> userList = new ArrayList<User>();
 	
 	private static int userId = 1;
-	
-	//adding static block to mock DB layer
-	/*static {
-		userList.add(new User(1,"Subho", new Date()));
-		userList.add(new User(2,"Pupu", new Date()));
-	}*/
 	
 	@Override
 	public List<User> getUsers() {
@@ -50,9 +44,10 @@ public class UserDaoServiceImpl implements IUserDaoService {
 
 	@Override
 	public List<User> deleteUserById(int id) {
-		for(User user: userList) {
+		for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
+			User user = (User) iterator.next();
 			if(user.getId() == id) {
-				userList.remove(user);
+				iterator.remove();
 			}
 		}
 		return userList;

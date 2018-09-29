@@ -6,4 +6,31 @@ spring:
   jackson:
     serialization:
       write-dates-as-timestamps: false
-      
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true  
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+  # scheme.sql and import.sql are loaded by springboot by default
+  
+  # Needed to use ReloadableResourceBundleMessageSource as ResourceBundleMessageSource
+  # does not support UTF-8    
+  #messages:
+  #  basename: messages
+  #  encoding: UTF-8
+  #  cache-duration: 30
+#Commenting below section as all I need know is Actuator  
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+    # more metrics means more performance issue so go easy on this
